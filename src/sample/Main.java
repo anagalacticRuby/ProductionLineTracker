@@ -15,7 +15,7 @@ public class Main extends Application {
 
   /**
    * The starting point of a JavaFX program.
-   *
+   * Here is where the fun begins
    * @param primaryStage the first thing the user sees
    * @throws Exception baba
    */
