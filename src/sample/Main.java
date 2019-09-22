@@ -1,3 +1,9 @@
+// Programmer Name: Nicholas Hansen
+// Date: 9/21/2019
+// File Desc: This is the main file of the ProductionLineTracker program.
+// It houses the main method, as well as some code to access the
+// PRODUCT database.
+
 package sample;
 
 import java.sql.Connection;
@@ -12,16 +18,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Yeah bro this is the main file of the production line program.
+ * This is the main file of the ProductionLineTracker program.
  *
- * @author Nicholas H
+ * <p>It contains the main method and code to access the PRODUCT database.
+ *
+ * @author Nicholas Hansen
  */
 public class Main extends Application {
 
   /**
    * The starting point of a JavaFX program.
    *
-   * @param primaryStage the first thing the user sees
+   * @param primaryStage the first thing the user sees when the program is run
    * @throws Exception exception
    */
   @Override
@@ -34,12 +42,12 @@ public class Main extends Application {
     // ctrl+alt+L is the google java formatter
     System.out.println("IM SUPER RAD");
   }
-  /**
-   *This is the main method, where things happen.
-   *
-   *
-   */
 
+  /**
+   * This is the main method, where things happen.
+   *
+   * @param args default parameters for a main method.
+   */
   public static void main(String[] args) {
     launch(args);
     // make sure IntelliJ isn't connected to database when running this program
