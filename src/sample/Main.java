@@ -1,8 +1,7 @@
 // Programmer Name: Nicholas Hansen
 // Date: 9/21/2019
 // File Desc: This is the main file of the ProductionLineTracker program.
-// It houses the main method, as well as some code to access the
-// PRODUCT database.
+// It houses the main method, as well as some code to access the PRODUCT database.
 
 package sample;
 
