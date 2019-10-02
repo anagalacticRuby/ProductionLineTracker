@@ -4,8 +4,11 @@
 
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -18,7 +21,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 
 /**
  * This is the controller class which houses the methods and fields of the GUI
@@ -27,7 +32,7 @@ import java.sql.*;
  *
  * @author Nicholas Hansen
  */
-public class Controller {
+public class Controller implements Initializable {
 
   @FXML private TabPane tbpTabPane;
 
@@ -43,7 +48,7 @@ public class Controller {
 
   @FXML private TextField txtManufacturer;
 
-  @FXML private ComboBox<String> comboItemType;
+  @FXML private ChoiceBox<String> chbItemType;
 
   @FXML private Button btnAddProduct;
 
@@ -94,7 +99,8 @@ public class Controller {
 
       System.out.println("Adding");
       stmt = conn.createStatement();
-      String sqlAddProducts = "INSERT INTO Product(type, manufacturer, name) " + "VALUES ( ?,?,? )";
+      String sqlAddProducts = "INSERT INTO Product(type, manufacturer, name) "
+              + "VALUES ( ?,?,? )";
       PreparedStatement prepareProducts = conn.prepareStatement(sqlAddProducts);
       prepareProducts.setString(1, "Audio");
       prepareProducts.setString(2, "Apple");
@@ -102,7 +108,7 @@ public class Controller {
       prepareProducts.executeUpdate();
       String sqlViewProducts = "Select * FROM Product";
       ResultSet result = stmt.executeQuery(sqlViewProducts);
-      while(result.next()){
+      while (result.next()) {
         String type = result.getString("type");
         String manufacturer = result.getString("manufacturer");
         String name = result.getString("name");
@@ -129,4 +135,11 @@ public class Controller {
   void recordProduction(ActionEvent event) {
     System.out.println("RECORDED");
   }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+      comboChooseQuant.getItems().addAll("1","2","3","4","5","6","7","8","9","10");
+      comboChooseQuant.setEditable(true);
+      comboChooseQuant.getSelectionModel().selectFirst();
+    }
 }
