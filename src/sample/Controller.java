@@ -100,10 +100,19 @@ public class Controller {
       prepareProducts.setString(2, "Apple");
       prepareProducts.setString(3, "iPod");
       prepareProducts.executeUpdate();
+      String sqlViewProducts = "Select * FROM Product";
+      ResultSet result = stmt.executeQuery(sqlViewProducts);
+      while(result.next()){
+        String type = result.getString("type");
+        String manufacturer = result.getString("manufacturer");
+        String name = result.getString("name");
+        System.out.println(type + " " + manufacturer + " " + name);
+      }
 
       System.out.println("Added!");
       // STEP 4: Clean-up environment
       prepareProducts.close();
+      result.close();
       stmt.close();
       conn.close();
     } catch (ClassNotFoundException | SQLException e) {
