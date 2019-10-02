@@ -18,6 +18,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
+import java.sql.*;
+
 /**
  * This is the controller class which houses the methods and fields of the GUI
  *
@@ -41,7 +43,7 @@ public class Controller {
 
   @FXML private TextField txtManufacturer;
 
-  @FXML private ChoiceBox<?> chbItemType;
+  @FXML private ComboBox<String> comboItemType;
 
   @FXML private Button btnAddProduct;
 
@@ -57,7 +59,7 @@ public class Controller {
 
   @FXML private Label lblChooseQuant;
 
-  @FXML private ComboBox<?> comboChooseQuant;
+  @FXML private ComboBox<String> comboChooseQuant;
 
   @FXML private Button btnRecordProduction;
 
@@ -72,7 +74,41 @@ public class Controller {
    */
   @FXML
   void addProduct(MouseEvent event) {
-    System.out.println("ADDED");
+    final String JDBC_DRIVER = "org.h2.Driver";
+    final String DB_URL = "jdbc:h2:./prod/PRODUCT";
+
+    //  Database credentials
+    final String USER = "";
+    final String PASS = "";
+    // Don't publish database password to Github
+    // Modify before you push for security reasons
+    Connection conn;
+    // Connection is a class and conn is an instance of the class (AKA object)
+    Statement stmt;
+    try {
+      // STEP 1: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      // STEP 2: Open a connection
+      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+      System.out.println("Adding");
+      stmt = conn.createStatement();
+      String sqlAddProducts = "INSERT INTO Product(type, manufacturer, name) " + "VALUES ( ?,?,? )";
+      PreparedStatement prepareProducts = conn.prepareStatement(sqlAddProducts);
+      prepareProducts.setString(1, "Audio");
+      prepareProducts.setString(2, "Apple");
+      prepareProducts.setString(3, "iPod");
+      prepareProducts.executeUpdate();
+
+      System.out.println("Added!");
+      // STEP 4: Clean-up environment
+      prepareProducts.close();
+      stmt.close();
+      conn.close();
+    } catch (ClassNotFoundException | SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
