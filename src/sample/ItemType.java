@@ -11,5 +11,4 @@ public enum ItemType {
     this.code = code;
   }
 
-  ItemType() {}
 }

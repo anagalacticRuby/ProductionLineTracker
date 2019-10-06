@@ -141,5 +141,6 @@ public class Controller implements Initializable {
       comboChooseQuant.getItems().addAll("1","2","3","4","5","6","7","8","9","10");
       comboChooseQuant.setEditable(true);
       comboChooseQuant.getSelectionModel().selectFirst();
+      chbItemType.getItems().addAll("Audio","Visual","AudioMobile","VisualMobile");
     }
 }
