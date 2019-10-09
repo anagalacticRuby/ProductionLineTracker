@@ -1,5 +1,5 @@
 // Programmer Name: Nicholas Hansen Date: 9/21/2019 File Desc: The Controller file, which houses
-// methods and fields for the GUI. You can find more detailed code about them in the sample.fxml
+// methods and fields for the GUI. You can find more detailed code about them in the ProductionTabs.fxml
 // file.
 
 package sample;
@@ -28,11 +28,11 @@ import java.util.ResourceBundle;
 /**
  * This is the controller class which houses the methods and fields of the GUI
  *
- * <p>The main 'structure' of this code can be found in sample.fxml
+ * <p>The main 'structure' of this code can be found in ProductionTabs.fxml
  *
  * @author Nicholas Hansen
  */
-public class Controller implements Initializable {
+public class ProductionTabController implements Initializable {
 
   @FXML private TabPane tbpTabPane;
 
@@ -79,6 +79,16 @@ public class Controller implements Initializable {
    */
   @FXML
   void addProduct(MouseEvent event) {
+    // Tells the program to use the product type currently selected in the product type choicebox
+    String productType = chbItemType.getValue();
+
+    // Tells the program to use the product name currently input in the product name text box
+    String productName = txtProductName.getText();
+
+    // Tells the program to use the manufacturer's name currently input in the product manufacturer
+    // text box
+    String productManufact = txtManufacturer.getText();
+
     final String JDBC_DRIVER = "org.h2.Driver";
     final String DB_URL = "jdbc:h2:./prod/PRODUCT";
 
@@ -99,12 +109,11 @@ public class Controller implements Initializable {
 
       System.out.println("Adding");
       stmt = conn.createStatement();
-      String sqlAddProducts = "INSERT INTO Product(type, manufacturer, name) "
-              + "VALUES ( ?,?,? )";
+      String sqlAddProducts = "INSERT INTO Product(type, manufacturer, name) " + "VALUES ( ?,?,? )";
       PreparedStatement prepareProducts = conn.prepareStatement(sqlAddProducts);
-      prepareProducts.setString(1, "Audio");
-      prepareProducts.setString(2, "Apple");
-      prepareProducts.setString(3, "iPod");
+      prepareProducts.setString(1, productType);
+      prepareProducts.setString(2, productManufact);
+      prepareProducts.setString(3, productName);
       prepareProducts.executeUpdate();
       String sqlViewProducts = "Select * FROM Product";
       ResultSet result = stmt.executeQuery(sqlViewProducts);
@@ -136,11 +145,11 @@ public class Controller implements Initializable {
     System.out.println("RECORDED");
   }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-      comboChooseQuant.getItems().addAll("1","2","3","4","5","6","7","8","9","10");
-      comboChooseQuant.setEditable(true);
-      comboChooseQuant.getSelectionModel().selectFirst();
-      chbItemType.getItems().addAll("Audio","Visual","AudioMobile","VisualMobile");
-    }
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    comboChooseQuant.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+    comboChooseQuant.setEditable(true);
+    comboChooseQuant.getSelectionModel().selectFirst();
+    chbItemType.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
+  }
 }

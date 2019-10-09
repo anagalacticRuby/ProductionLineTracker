@@ -1,28 +1,46 @@
 package sample;
 
 public class AudioPlayer extends Product implements MultimediaControl {
-  private String audioSpecification;
-  private String mediaType;
+  private String supportedAudioFormats;
+  private String supportedPlaylistFormats;
 
-  AudioPlayer(String name, String manufacturer, String audioSpecification) {
-    super(name, manufacturer, "Audio");
-    this.audioSpecification = audioSpecification;
-    //this.mediaType = mediaType;
+  AudioPlayer(
+      String name,
+      String manufacturer,
+      String supportedAudioFormats,
+      String supportedPlaylistFormats) {
+    super(name, manufacturer, ItemType.AUDIO);
+    this.supportedAudioFormats = supportedAudioFormats;
+    this.supportedPlaylistFormats = supportedPlaylistFormats;
   }
-    public String toString() {
-      return super.toString() + "\n" + "Supported Audio Formats: " + audioSpecification  +
-              "\n" + "Supported Playlist Formats: " + mediaType;
 
-    }
-  @Override
-  public void play() {}
-
-  @Override
-  public void stop() {}
-
-  @Override
-  public void previous() {}
+  public String toString() {
+    return super.toString()
+        + "\n"
+        + "Supported Audio Formats: "
+        + supportedAudioFormats
+        + "\n"
+        + "Supported Playlist Formats: "
+        + supportedPlaylistFormats;
+  }
 
   @Override
-  public void next() {}
+  public void play() {
+    System.out.println("Playing");
+  }
+
+  @Override
+  public void stop() {
+    System.out.println("Stopping");
+  }
+
+  @Override
+  public void previous() {
+    System.out.println("Previous");
+  }
+
+  @Override
+  public void next() {
+    System.out.println("Next");
+  }
 }

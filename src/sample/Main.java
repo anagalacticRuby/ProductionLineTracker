@@ -5,7 +5,6 @@
 
 package sample;
 
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,8 +28,8 @@ public class Main extends Application {
    */
   @Override
   public void start(Stage primaryStage) throws Exception {
-
-    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+    setUserAgentStylesheet(STYLESHEET_CASPIAN);
+    Parent root = FXMLLoader.load(getClass().getResource("ProductionTabs.fxml"));
     primaryStage.setTitle("WOW man WELCOME to the PRODUCTION LINE TRACKER PROGRAM");
     primaryStage.setScene(new Scene(root, 600, 400));
     primaryStage.show();

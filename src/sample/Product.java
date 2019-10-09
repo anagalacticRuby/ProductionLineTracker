@@ -2,15 +2,14 @@ package sample;
 /**
  *
  *
- * @author Nicholas Hansen
- **/
+ * @author Nicholas Hansen */
 public abstract class Product implements Item {
   private int Id;
-  private String Type;
+  private ItemType Type;
   private String Manufacturer;
   private String Name;
 
-  Product(String name, String manufacturer, String type) {
+  Product(String name, String manufacturer, ItemType type) {
     this.Name = name;
     this.Manufacturer = manufacturer;
     this.Type = type;
@@ -40,9 +39,13 @@ public abstract class Product implements Item {
     Name = name;
   }
 }
-class Widget extends Product{
+/**
+ * This class is merely used to make sure the Product class works.
+ * @author Nicholas Hansen
+ * */
+class Widget extends Product {
 
-    Widget(String name, String manufacturer, String type) {
-        super(name, manufacturer, type);
-    }
+  Widget(String name, String manufacturer, ItemType type) {
+    super(name, manufacturer, type);
+  }
 }
