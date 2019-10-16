@@ -71,6 +71,34 @@ public class ProductionTabController implements Initializable {
 
   @FXML private TextArea txaProductLog;
 
+  private Connection conn;
+  private Statement stmt;
+
+   void initializeDB() {
+    final String JDBC_DRIVER = "org.h2.Driver";
+    final String DB_URL = "jdbc:h2:./prod/PRODUCT";
+
+    //  Database credentials
+    final String USER = "";
+    final String PASS = "";
+    // Don't publish database password to Github
+    // Modify before you push for security reasons
+
+    // Connection is a class and conn is an instance of the class (AKA object)
+
+
+    try {
+      // STEP 1: Register JDBC driver
+      Class.forName(JDBC_DRIVER);
+
+      // STEP 2: Open a connection
+      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      stmt = conn.createStatement();
+    } catch (ClassNotFoundException | SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * This method deals with the Add Product button.
    *
@@ -78,6 +106,7 @@ public class ProductionTabController implements Initializable {
    */
   @FXML
   void addProduct(MouseEvent event) {
+   try{
     // Tells the program to use the product type currently selected in the product type choicebox
     String productType = chbItemType.getValue();
 
@@ -88,26 +117,9 @@ public class ProductionTabController implements Initializable {
     // text box
     String productManufact = txtManufacturer.getText();
 
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String DB_URL = "jdbc:h2:./prod/PRODUCT";
-
-    //  Database credentials
-    final String USER = "";
-    final String PASS = "";
-    // Don't publish database password to Github
-    // Modify before you push for security reasons
-    Connection conn;
-    // Connection is a class and conn is an instance of the class (AKA object)
-    Statement stmt;
-    try {
-      // STEP 1: Register JDBC driver
-      Class.forName(JDBC_DRIVER);
-
-      // STEP 2: Open a connection
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
+initializeDB();
       System.out.println("Adding");
-      stmt = conn.createStatement();
+
       String sqlAddProducts = "INSERT INTO Product(type, manufacturer, name) " + "VALUES ( ?,?,? )";
       PreparedStatement prepareProducts = conn.prepareStatement(sqlAddProducts);
       prepareProducts.setString(1, productType);
@@ -124,16 +136,17 @@ public class ProductionTabController implements Initializable {
       }
 
       System.out.println("Added!");
+
       // STEP 4: Clean-up environment
+
       prepareProducts.close();
       result.close();
       stmt.close();
       conn.close();
-    } catch (ClassNotFoundException | SQLException e) {
-      e.printStackTrace();
-    }
-  }
 
+}catch(SQLException e) {
+        e.printStackTrace();
+        }}
   /**
    * This method is tied to the Record Product button.
    *
