@@ -1,4 +1,4 @@
-package sample;
+package io.github.anagalacticRuby;
 
 public class AudioPlayer extends Product implements MultimediaControl {
   private String supportedAudioFormats;

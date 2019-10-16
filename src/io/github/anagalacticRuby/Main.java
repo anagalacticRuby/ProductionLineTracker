@@ -3,7 +3,7 @@
 // File Desc: This is the main file of the ProductionLineTracker program.
 // It houses the main method, as well as some code to access the PRODUCT database.
 
-package sample;
+package io.github.anagalacticRuby;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +31,9 @@ public class Main extends Application {
     setUserAgentStylesheet(STYLESHEET_CASPIAN);
     Parent root = FXMLLoader.load(getClass().getResource("ProductionTabs.fxml"));
     primaryStage.setTitle("WOW man WELCOME to the PRODUCTION LINE TRACKER PROGRAM");
-    primaryStage.setScene(new Scene(root, 600, 400));
+    Scene scene = new Scene(root,600,400);
+    primaryStage.setScene(scene);
+    scene.getStylesheets().add(getClass().getResource("ProductionStyleSheet.css").toExternalForm());
     primaryStage.show();
     // ctrl+alt+L is the google java formatter
     System.out.println("IM SUPER RAD");

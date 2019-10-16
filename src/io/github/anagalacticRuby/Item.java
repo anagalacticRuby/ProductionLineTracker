@@ -1,4 +1,4 @@
-package sample;
+package io.github.anagalacticRuby;
 
 public interface Item {
   int getId();

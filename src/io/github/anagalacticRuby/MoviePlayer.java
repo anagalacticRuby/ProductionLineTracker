@@ -1,4 +1,4 @@
-package sample;
+package io.github.anagalacticRuby;
 
 public class MoviePlayer extends Product implements MultimediaControl{
 

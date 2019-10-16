@@ -1,0 +1,6 @@
+#btnAddProduct {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+
+}

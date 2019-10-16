@@ -1,4 +1,4 @@
-package sample;
+package io.github.anagalacticRuby;
 
 /** */
 public class Screen implements ScreenSpec {
@@ -6,6 +6,11 @@ public class Screen implements ScreenSpec {
   private int refreshrate;
   private int responsetime;
 
+  Screen(String resolution, int refreshrate, int responsetime){
+    this.resolution = resolution;
+    this.refreshrate = refreshrate;
+    this.responsetime = responsetime;
+  }
   public String toString() {
     return "Resolution: "
         + resolution

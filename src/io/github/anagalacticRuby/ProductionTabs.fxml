@@ -25,9 +25,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import java.net.URL?>
+
 <TabPane fx:id="tbpTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
          prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171"
-         xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProductionTabController">
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.anagalacticRuby.ProductionTabController">
     <Tab fx:id="tabProduce" text="Produce">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
             <Label fx:id="lblChooseProduct" layoutY="5.0" text="Choose Product"/>
@@ -74,4 +76,7 @@
             <TextArea fx:id="txaProductLog" prefHeight="200.0" prefWidth="200.0"/>
         </AnchorPane>
     </Tab>
+    <stylesheets>
+        <URL value="@ProductionStyleSheet.css"/>
+    </stylesheets>
 </TabPane>

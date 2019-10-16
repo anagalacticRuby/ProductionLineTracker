@@ -1,11 +1,10 @@
 // Programmer Name: Nicholas Hansen Date: 9/21/2019 File Desc: The Controller file, which houses
-// methods and fields for the GUI. You can find more detailed code about them in the ProductionTabs.fxml
+// methods and fields for the GUI. You can find more detailed code about them in the
+// ProductionTabs.fxml
 // file.
 
-package sample;
+package io.github.anagalacticRuby;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -151,5 +150,6 @@ public class ProductionTabController implements Initializable {
     comboChooseQuant.setEditable(true);
     comboChooseQuant.getSelectionModel().selectFirst();
     chbItemType.getItems().addAll("Audio", "Visual", "AudioMobile", "VisualMobile");
+    TestDriver.testMultimedia();
   }
 }
