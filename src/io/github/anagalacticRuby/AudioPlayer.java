@@ -1,5 +1,13 @@
 package io.github.anagalacticRuby;
 
+/**
+ * This class deals with audio products that do not have screens.
+ *
+ * <p>With the help of a constructor it can obtain the supported audio formats and playlist formats,
+ * and then display them with the use of the toString method.
+ *
+ * @author Nicholas Hansen
+ */
 public class AudioPlayer extends Product implements MultimediaControl {
   private String supportedAudioFormats;
   private String supportedPlaylistFormats;

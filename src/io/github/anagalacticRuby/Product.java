@@ -1,8 +1,12 @@
 package io.github.anagalacticRuby;
 /**
+ * This is the class that is the powerhouse of the program.
  *
+ * <p>A product's name, manufacturer and type are put into a constructor and then printed when the
+ * toString is called.
  *
- * @author Nicholas Hansen */
+ * @author Nicholas Hansen
+ */
 public abstract class Product implements Item {
   private int Id;
   private ItemType Type;
@@ -41,8 +45,9 @@ public abstract class Product implements Item {
 }
 /**
  * This class is merely used to make sure the Product class works.
+ *
  * @author Nicholas Hansen
- * */
+ */
 class Widget extends Product {
 
   Widget(String name, String manufacturer, ItemType type) {

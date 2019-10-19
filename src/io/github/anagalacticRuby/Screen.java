@@ -1,18 +1,25 @@
 package io.github.anagalacticRuby;
 
-/** */
+/**
+ * This class contains code regarding a product's screen details such as resolution and refresh
+ * rate. It has a constructor to be called when creating products with screens.
+ *
+ * @author Nicholas Hansen
+ */
 public class Screen implements ScreenSpec {
   private String resolution;
   private int refreshrate;
   private int responsetime;
 
-  Screen(String resolution, int refreshrate, int responsetime){
+  Screen(String resolution, int refreshrate, int responsetime) {
     this.resolution = resolution;
     this.refreshrate = refreshrate;
     this.responsetime = responsetime;
   }
+
   public String toString() {
-    return "Resolution: "
+    return "Screen:"
+        + "\nResolution: "
         + resolution
         + "\n"
         + "Refresh rate: "

@@ -27,6 +27,8 @@ import java.util.ResourceBundle;
 /**
  * This is the controller class which houses the methods and fields of the GUI
  *
+ * <p>This class also houses code regarding the database for this program.
+ *
  * <p>The main 'structure' of this code can be found in ProductionTabs.fxml
  *
  * @author Nicholas Hansen
@@ -74,7 +76,7 @@ public class ProductionTabController implements Initializable {
   private Connection conn;
   private Statement stmt;
 
-   void initializeDB() {
+  void initializeDB() {
     final String JDBC_DRIVER = "org.h2.Driver";
     final String DB_URL = "jdbc:h2:./prod/PRODUCT";
 
@@ -85,7 +87,6 @@ public class ProductionTabController implements Initializable {
     // Modify before you push for security reasons
 
     // Connection is a class and conn is an instance of the class (AKA object)
-
 
     try {
       // STEP 1: Register JDBC driver
@@ -106,18 +107,19 @@ public class ProductionTabController implements Initializable {
    */
   @FXML
   void addProduct(MouseEvent event) {
-   try{
-    // Tells the program to use the product type currently selected in the product type choicebox
-    String productType = chbItemType.getValue();
+    try {
+      // Tells the program to use the product type currently selected in the product type choicebox
+      String productType = chbItemType.getValue();
 
-    // Tells the program to use the product name currently input in the product name text box
-    String productName = txtProductName.getText();
+      // Tells the program to use the product name currently input in the product name text box
+      String productName = txtProductName.getText();
 
-    // Tells the program to use the manufacturer's name currently input in the product manufacturer
-    // text box
-    String productManufact = txtManufacturer.getText();
+      // Tells the program to use the manufacturer's name currently input in the product
+      // manufacturer
+      // text box
+      String productManufact = txtManufacturer.getText();
 
-initializeDB();
+      initializeDB();
       System.out.println("Adding");
 
       String sqlAddProducts = "INSERT INTO Product(type, manufacturer, name) " + "VALUES ( ?,?,? )";
@@ -144,9 +146,10 @@ initializeDB();
       stmt.close();
       conn.close();
 
-}catch(SQLException e) {
-        e.printStackTrace();
-        }}
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
   /**
    * This method is tied to the Record Product button.
    *
@@ -155,6 +158,10 @@ initializeDB();
   @FXML
   void recordProduction(ActionEvent event) {
     System.out.println("RECORDED");
+    int numProduced = Integer.parseInt(comboChooseQuant.getValue());
+    System.out.println(numProduced);
+    ProductionRecord pr = new ProductionRecord(numProduced);
+    txaProductLog.insertText(0, pr.toString());
   }
 
   @Override

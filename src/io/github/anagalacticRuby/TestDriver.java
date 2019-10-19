@@ -3,6 +3,10 @@ package io.github.anagalacticRuby;
 import java.util.ArrayList;
 
 /**
+ * This is primarily a test class to confirm that the other classes are working properly.
+ *
+ * <p>See the ProductionTabController's initialize method for when this class's test method is
+ * called.
  *
  * @author Nicholas Hansen
  */

@@ -3,7 +3,9 @@ package io.github.anagalacticRuby;
 import java.util.Date;
 
 /**
- *
+ * This class is where the data about a product's production record is managed.
+ * <p>The information will be posted in the Production Log tab after the record production button is pressed.</p>
+ * @author Nicholas Hansen
  */
 public class ProductionRecord {
   private int productionNumber;
@@ -49,7 +51,7 @@ public class ProductionRecord {
     this.dateProduced = new Date();
   }
 
-  ProductionRecord(int productID, int productionNumber, String serialNumber, Date dateProduced) {
+  ProductionRecord(int productionNumber,int productID, String serialNumber, Date dateProduced) {
       this.productID = productID;
       this.productionNumber = productionNumber;
       this.serialNumber = serialNumber;
@@ -58,7 +60,7 @@ public class ProductionRecord {
 
     @Override
     public String toString() {
-        return "Prod. Number: " + productionNumber + "Product ID: " + productID
-                + "Serial Number: " + serialNumber + "Date: " + dateProduced;
+        return " Prod. Number: " + productionNumber + " Product ID: " + productID
+                + " Serial Number: " + serialNumber + " Date: " + dateProduced;
     }
 }
