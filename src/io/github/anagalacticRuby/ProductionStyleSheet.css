@@ -4,13 +4,13 @@
  */
 
 #btnAddProduct {
-    -fx-background-color: green;
+    -fx-base: green;
     -fx-text-fill: white;
     -fx-cursor: hand;
 
 }
 #tbpTabPane{
-    -fx-background-color: #fff3ae;
+    -fx-base: #fff3ae;
 }
 .tab-header-background{
     -fx-background-color: rgb(214, 255, 252);

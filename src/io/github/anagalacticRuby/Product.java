@@ -42,6 +42,10 @@ public abstract class Product implements Item {
   public void setName(String name) {
     Name = name;
   }
+
+  public ItemType getType() {
+    return Type;
+  }
 }
 /**
  * This class is merely used to make sure the Product class works.

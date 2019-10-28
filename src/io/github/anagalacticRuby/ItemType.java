@@ -11,4 +11,4 @@ public enum ItemType {
   ItemType(String code) {
     this.code = code;
   }
-}
+  String getCode() { return code; }}
