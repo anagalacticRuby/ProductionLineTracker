@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Nicholas Hansen
  */
-public class ProductionRecord {
+class ProductionRecord {
   private int productionNumber;
   private int productID;
   private String serialNumber;

@@ -189,6 +189,7 @@ public class ProductionTabController implements Initializable {
       btnAddProduct.setDisable(true);
       // Resets the progress bar back to 0
       productionProgress.setProgress(0);
+      lblProgress.setText("Check the Produce tab!");
 
       lblRecording.setText("Select a product to record.");
 
@@ -218,7 +219,7 @@ public class ProductionTabController implements Initializable {
         && !chbItemType.getSelectionModel().isEmpty()) {
       // If both text fields are empty and the product type has been selected this happens
       productionProgress.setProgress(.33);
-      lblProgress.setText("1/3 There..");
+      lblProgress.setText("1/3 There...");
     } else if (!txtProductName.getText().isEmpty()
             && txtManufacturer.getText().isEmpty()
             && !chbItemType.getSelectionModel().isEmpty()

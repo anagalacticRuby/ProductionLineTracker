@@ -52,8 +52,8 @@
                       promptText="Choose Quantity..."/>
             <Button fx:id="btnRecordProduction" disable="true" layoutX="261.0" layoutY="78.0" mnemonicParsing="false"
                     onAction="#recordProduction" prefHeight="35.0" text="Record Production"/>
-            <Label fx:id="lblRecording" alignment="TOP_LEFT" layoutX="270.0" layoutY="143.0" prefHeight="80.0"
-                   prefWidth="198.0" text="Add products first!">
+            <Label fx:id="lblRecording" alignment="TOP_LEFT" layoutX="270.0" layoutY="143.0" prefHeight="121.0"
+                   prefWidth="240.0" text="Add products first!" wrapText="true">
                 <font>
                     <Font size="14.0"/>
                 </font>
