@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <pattern value="io.github.anagalacticRuby.Item" method="getName" />
+  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/jdocs" />
     <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="false" />

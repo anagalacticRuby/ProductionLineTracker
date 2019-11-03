@@ -1,9 +1,9 @@
 // Programmer Name: Nicholas Hansen
-// Date: 9/21/2019
+// Date: 11/2/2019
 // File Desc: This is the main file of the ProductionLineTracker program.
 // It houses the main method, as well as some code to access the PRODUCT database.
 
-package io.github.anagalacticRuby;
+package io.github.anagalacticruby;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,26 +23,29 @@ public class Main extends Application {
   /**
    * The starting point of a JavaFX program.
    *
-   * @param primaryStage the first thing the user sees when the program is run
-   * @throws Exception exception
+   * <p>Essentially, where all the magic begins.
+   *
+   * @param primaryStage The first thing the user sees when the program is run
+   * @throws Exception Exception
    */
   @Override
   public void start(Stage primaryStage) throws Exception {
-    setUserAgentStylesheet(STYLESHEET_CASPIAN);
     Parent root = FXMLLoader.load(getClass().getResource("ProductionTabs.fxml"));
-    primaryStage.setTitle("WOW man WELCOME to the PRODUCTION LINE TRACKER PROGRAM");
-    Scene scene = new Scene(root,600,400);
+    primaryStage.setTitle("Welcome to the Production Tracker v2!");
+    Scene scene = new Scene(root, 600, 450);
+
     primaryStage.setScene(scene);
+    primaryStage.setResizable(false);
     scene.getStylesheets().add(getClass().getResource("ProductionStyleSheet.css").toExternalForm());
     primaryStage.show();
     // ctrl+alt+L is the google java formatter
-    System.out.println("IM SUPER RAD");
+    System.out.println("Bottom Text");
   }
 
   /**
    * This is the main method, where things happen.
    *
-   * @param args default parameters for a main method.
+   * @param args Default parameters for a main method.
    */
   public static void main(String[] args) {
     launch(args);

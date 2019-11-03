@@ -1,6 +1,6 @@
-package io.github.anagalacticRuby;
+package io.github.anagalacticruby;
 
-public interface MultimediaControl {
+interface MultimediaControl {
   void play();
 
   void stop();

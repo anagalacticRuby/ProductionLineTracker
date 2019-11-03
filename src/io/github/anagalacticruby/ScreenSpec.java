@@ -1,6 +1,6 @@
-package io.github.anagalacticRuby;
+package io.github.anagalacticruby;
 
-public interface ScreenSpec {
+interface ScreenSpec {
   String getResolution();
 
   int getRefreshRate();

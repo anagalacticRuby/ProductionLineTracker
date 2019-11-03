@@ -1,6 +1,6 @@
-package io.github.anagalacticRuby;
+package io.github.anagalacticruby;
 
-public interface Item {
+interface Item {
   int getId();
 
   void setName(String name);
