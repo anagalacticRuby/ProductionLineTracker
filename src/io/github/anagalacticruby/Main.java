@@ -5,6 +5,7 @@
 
 package io.github.anagalacticruby;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,7 +42,6 @@ public class Main extends Application {
     // ctrl+alt+L is the google java formatter
     System.out.println("Bottom Text");
   }
-
   /**
    * This is the main method, where things happen.
    *
@@ -49,5 +49,6 @@ public class Main extends Application {
    */
   public static void main(String[] args) {
     launch(args);
+
   }
 }

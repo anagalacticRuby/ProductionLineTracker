@@ -6,7 +6,7 @@ public enum ItemType {
   AUDIO_MOBILE("AM"),
   VISUAL_MOBILE("VM");
 
-  private final String code;
+  public final String code;
 
   /**
    * A simple little mutator that sets the current code value to the string code value passed in.

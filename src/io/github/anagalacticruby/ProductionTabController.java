@@ -333,8 +333,13 @@ public class ProductionTabController implements Initializable {
     // The following line of code adds a "Sample" row to the table to verify it is functional.
     Product sample = new Widget("Sample", "Oracle", ItemType.VISUAL);
     productLine.add(sample);
-
+    listChooseProduct.getItems().addAll(productLine);
     setupProductLineTable();
+    try {
+      loadProductList();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -351,5 +356,38 @@ public class ProductionTabController implements Initializable {
     itemTypeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
     // Set the TableView to the productLine ObservableList
     tblExistingProducts.setItems(productLine);
+  }
+
+  private void loadProductList() throws SQLException {
+    initializeDB();
+    String sql = "SELECT * FROM Product";
+
+    ResultSet rs = stmt.executeQuery(sql);
+    while (rs.next()) {
+      Integer id = rs.getInt(1);
+      String name = rs.getString(2);
+      String type = rs.getString(3);
+      String manufacturer = rs.getString(4);
+      //
+
+      ItemType DBType = null;
+      if (type.equals("AU")) {
+        DBType = ItemType.AUDIO;
+      }else if(type.equals("VI")){
+        DBType = ItemType.VISUAL;
+      }else if(type.equals("AM")){
+        DBType = ItemType.AUDIO_MOBILE;
+      }else if(type.equals("VM")){
+        DBType = ItemType.VISUAL_MOBILE;
+      }
+
+
+      Product productFromDB = new Widget(id, name, manufacturer, DBType);
+
+      productLine.add(productFromDB);
+      rs.close();
+      stmt.close();
+    }
+
   }
 }
