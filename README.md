@@ -12,8 +12,8 @@ I made this program over the course of my time at FGCU's COP 3003 Object-Oriente
 Initially I made this project simply because I was assigned to, but over time I started to get more and more into making it an expression of my learning to demonstrate how willing I could be to learn something that interests me. Each time I got around to spending long sessions working on the project I set out to remix or improve upon what I had done before, so that each big push felt like it was something astounding, and worth being proud of. That being said I still believe there are more things I could do to polish and improve upon what exists in the most current version of this project.
 
 ## Demonstration
-(prod/programCapture.gif)
 
+![enter image description here](prod/programCapture.gif)
 ## Documentation
 Java Documentation can be found at:
 [This GitHub Pages Link](https://anagalacticruby.github.io/ProductionLineTracker/)
@@ -49,7 +49,7 @@ Got a neat style sheet you would like to see in a future build? Make a separate 
 Nicholas H.
 
 ## License
-See the Licsense.md file in master
+
 
 ## Acknowledgments
 My OOP Teacher, [Professor Vanselow](https://github.com/profvanselow)
