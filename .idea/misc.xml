@@ -4,7 +4,7 @@
     <pattern value="io.github.anagalacticRuby.Item" method="getName" />
   </component>
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/jdocs" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/docs" />
     <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="false" />
   </component>
   <component name="ProjectKey">

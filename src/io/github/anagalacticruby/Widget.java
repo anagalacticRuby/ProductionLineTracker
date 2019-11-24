@@ -10,6 +10,7 @@ package io.github.anagalacticruby;
  * @author Nicholas Hansen
  */
 class Widget extends Product {
+
   /**
    * A constructor for Widgets which also happen to be Products.
    *
@@ -26,7 +27,7 @@ class Widget extends Product {
     super(name, manufacturer, type);
   }
 
-  Widget(int id, String name, String manufacturer, ItemType type){
-    super(id,name,manufacturer,type);
+  Widget(int id, String name, String manufacturer, ItemType type) {
+    super(id, name, manufacturer, type);
   }
 }

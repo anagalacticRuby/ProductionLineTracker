@@ -1,0 +1,205 @@
+/**
+*
+*This is the Dark Theme Style Sheet
+ Last Edited Date: 11/23/2019
+* Author: Nicholas Hansen
+ */
+.root {
+    /*
+        -fx-base: #005e5e;*/
+    /*-fx-base: derive(royalblue, -40%);*/
+    -fx-base: derive(purple, -50%);
+    -fx-font-family: Verdana;
+}
+
+#btnAddProduct, #btnRecordProduction {
+    -fx-base: darkmagenta;
+    -fx-effect: dropshadow(one-pass-box, lightslategray, 2, 2, 1, 1);
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+
+}
+
+#btnAddProduct:pressed, #btnRecordProduction:pressed {
+    -fx-background-color: linear-gradient(mediumpurple, mediumvioletred);
+}
+
+#chbItemType {
+    /*
+        -fx-base: navy;*/
+    -fx-text-alignment: center;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 50%, mediumvioletred, indigo);
+    -fx-effect: innershadow(one-pass-box, powderblue, 2, 4, 1, 1);
+    -fx-text-fill: white;
+}
+
+.choice-box .context-menu {
+    /*    -fx-background-color: derive(#660099, -20%);*/
+    -fx-background-color: radial-gradient(center 50% 50%, radius 75%, indigo, black) k;
+    -fx-background-radius: 6 5 2;
+}
+
+#chbItemType .context-menu .label {
+    -fx-text-fill: ghostwhite;
+}
+
+
+.choice-box .open-button .arrow {
+    -fx-background-color: white, gold;
+}
+
+#chbItemType .label, .choice-box .label {
+    -fx-text-fill: inherit;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+
+#comboChooseQuant, #comboChooseQuant .list-cell {
+    -fx-base: #663399;
+    -fx-background-radius: 2 10 2 10;
+    -fx-text-fill: white;
+}
+
+#comboChooseQuant:selected, #comboChooseQuant .arrow-button {
+    -fx-background-radius: 2 10 2 10;
+}
+
+#comboChooseQuant .arrow-button .arrow {
+    -fx-background-color: green, goldenrod;
+}
+
+
+.grid-pane {
+    -fx-base: #666699;
+    /*    -fx-background-color: slategray;*/
+    -fx-background-radius: 5 5 5 5;
+    -fx-text-fill: ghostwhite;
+}
+
+#lblManufacturer, #lblProductName, #lblItemType,
+#lblChooseProduct, #lblChooseQuant, #lblExistingProducts,
+#lblProgress, #lblRecording {
+    -fx-text-fill: ghostwhite;
+    -fx-effect: dropshadow(one-pass-box, black, 2, 2, 1, 1);
+}
+
+#lblRecording, #lblChooseProduct, #lblChooseQuant, #lblProgress, #lblExistingProducts {
+    -fx-font-size: 13pt;
+}
+
+
+.list-cell:odd {
+    -fx-background-color: derive(indigo, 20%);
+}
+
+.list-cell:even {
+    -fx-background-color: derive(mediumvioletred, -10%);
+}
+
+.list-view:selected, .list-cell:filled:selected {
+    -fx-background-color: purple;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #5e0e5e;
+    -fx-text-fill: ghostwhite;
+}
+
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to left, gold, midnightblue, darkorchid,
+    maroon, mediumvioletred, sandybrown, orchid, ghostwhite);
+    -fx-background-radius: 4 4 4 4;
+    -fx-background-insets: 5 5 5 5;
+}
+
+.progress-bar .track {
+    -fx-background-color: linear-gradient(to top, darkslateblue, black);
+    -fx-effect: innershadow(one-pass-box, black, 2, 1, 1, 1);
+    -fx-background-radius: 3 3 3 3;
+}
+
+.rectangle {
+
+    -fx-background-color: azure;
+    -fx-fill: linear-gradient(to top, darkmagenta, mediumvioletred 90%);
+    -fx-effect: innershadow(one-pass-box, gold, 2, 4, 1, 1)
+}
+
+
+.tab-header-background {
+    -fx-background-color: linear-gradient(to bottom, midnightblue, darkslateblue, blueviolet);
+    -fx-background-insets: 0 0 1 0;
+}
+
+.tab-pane .tab:top {
+    -fx-base: derive(darkmagenta, 30%);
+}
+
+
+.tab-pane .tab:selected:top {
+    -fx-base: derive(mediumvioletred, -30%);
+}
+
+.table-row-cell:even {
+    -fx-background-color: linear-gradient(to bottom, steelblue, indigo);
+    -fx-light-text-color: white;
+    /*    -fx-border-color: linear-gradient(to bottom, ghostwhite, transparent);*/
+}
+
+.table-row-cell:odd {
+    -fx-background-color: linear-gradient(to top, mediumvioletred, darkmagenta);
+    -fx-light-text-color: white;
+    /*-fx-border-color: black;*/
+}
+
+.table-row-cell:focused, .table-row-cell:selected, .table-row-cell:filled:selected {
+    -fx-background-color: derive(indigo, -50%);
+    -fx-text-fill: white;
+    -fx-fill: red;
+    -fx-cell-hover-color: green;
+
+}
+
+.table-view:row-selection, .table-row-selection:filled:selected, .table-cell {
+    -fx-light-text-color: white;
+    -fx-text-fill: white;
+    -fx-focused-text-base-color: white;
+}
+
+.table-column .label {
+    -fx-text-fill: ghostwhite;
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to top, midnightblue, indigo 90%);
+    -fx-background-insets: 0 1 0 0;
+    -fx-effect: innershadow(one-pass-box, darkgray, 4, 2, 1, 1);
+
+}
+
+.thumb {
+    -fx-base: goldenrod;
+    -fx-background-color: linear-gradient(to left, darkgoldenrod, gold);
+}
+
+.scroll-bar {
+    -fx-base: derive(mediumpurple, -20%);
+}
+
+.table-view:row-selection .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to bottom, darkgoldenrod, gold)
+}
+
+#txtManufacturer, #txtProductName {
+    -fx-text-fill: white;
+    -fx-effect: innershadow(one-pass-box, goldenrod, 2, 4, 1, 1);
+    -fx-base: derive(darkred, 80%);
+    -fx-background-color: derive(midnightblue, -40%);
+    -fx-highlight-fill: goldenrod;
+    -fx-prompt-text-fill: lightgray;
+}
+
+.check-box {
+    -fx-base: purple;
+}

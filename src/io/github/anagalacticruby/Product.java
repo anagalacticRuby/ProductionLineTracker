@@ -29,12 +29,14 @@ public abstract class Product implements Item {
     this.manufacturer = manufacturer;
     this.type = type;
   }
-  Product(int id, String name, String manufacturer, ItemType type){
+
+  Product(int id, String name, String manufacturer, ItemType type) {
     this.id = id;
     this.name = name;
     this.manufacturer = manufacturer;
     this.type = type;
   }
+
   /**
    * This method prints the details of the product constructed when called upon.
    *

@@ -1,5 +1,5 @@
 // Programmer Name: Nicholas Hansen
-// Date: 11/2/2019
+// Date: 11/23/2019
 // File Desc: The Controller file, which houses
 // methods and fields for the GUI. You can find more detailed code about them in the
 // ProductionTabs.fxml
@@ -7,6 +7,7 @@
 
 package io.github.anagalacticruby;
 
+import java.io.FileInputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,9 +15,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +29,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -80,8 +84,37 @@ public class ProductionTabController implements Initializable {
 
   @FXML private Label lblRecording;
 
+  @FXML private Label lblEmployError;
+
+  @FXML private TextField txtEmployName;
+
+  @FXML private PasswordField passEmployee;
+
+  @FXML private TextArea txaEmployeeDetails;
+
+  @FXML private Button generateButton;
+
+  @FXML private RadioButton starBox;
+
+  @FXML private RadioButton retroBox;
+
+  @FXML private RadioButton noBox;
+
   private Connection conn;
   private Statement stmt;
+
+  /**
+   * This method reverses the order of the string used for the database password.
+   *
+   * @param pw the password to reverse
+   * @return the reverse password
+   */
+  private String reverseString(String pw) {
+    if (pw.isEmpty()) {
+      return pw;
+    }
+    return reverseString(pw.substring(1)) + pw.charAt(0);
+  }
 
   /**
    * A method that is merely used to set up the connection to the JDBC database.
@@ -89,26 +122,37 @@ public class ProductionTabController implements Initializable {
    * <p>This is where all of the products that have been created are stored.
    */
   private void initializeDB() {
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String DB_URL = "jdbc:h2:./prod/PRODUCT";
-
-    //  Database credentials
-    final String USER = "";
-    final String PASS = "";
-    // Don't publish database password to Github
-    // Modify before you push for security reasons
-
-    // Connection is a class and conn is an instance of the class (AKA object)
-
     try {
-      // STEP 1: Register JDBC driver
-      Class.forName(JDBC_DRIVER);
+      final String JDBC_DRIVER = "org.h2.Driver";
+      final String DB_URL = "jdbc:h2:./prod/PRODUCT";
 
-      // STEP 2: Open a connection
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
-      stmt = conn.createStatement();
-    } catch (ClassNotFoundException | SQLException e) {
-      e.printStackTrace();
+      Properties prop = new Properties();
+      prop.load(new FileInputStream("prod/properties"));
+
+      //  Database credentials
+      final String USER = "";
+
+      final String PASS = prop.getProperty("password");
+      final String encryptPass = reverseString(prop.getProperty("password"));
+      lblEmployError.setText(encryptPass);
+      lblEmployError.setText("V Your Details V");
+      // Don't publish database password to Github
+      // Modify before you push for security reasons
+
+      // Connection is a class and conn is an instance of the class (AKA object)
+
+      try {
+        // STEP 1: Register JDBC driver
+        Class.forName(JDBC_DRIVER);
+
+        // STEP 2: Open a connection
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+      } catch (ClassNotFoundException | SQLException e) {
+        e.printStackTrace();
+      }
+    } catch (Exception g) {
+      g.printStackTrace();
     }
   }
 
@@ -198,7 +242,7 @@ public class ProductionTabController implements Initializable {
       stmt.close();
       conn.close();
 
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -214,46 +258,52 @@ public class ProductionTabController implements Initializable {
   @FXML
   void addProgress(KeyEvent event) {
 
-    if (txtProductName.getText().isEmpty()
-        && txtManufacturer.getText().isEmpty()
-        && !chbItemType.getSelectionModel().isEmpty()) {
-      // If both text fields are empty and the product type has been selected this happens
-      productionProgress.setProgress(.33);
-      lblProgress.setText("1/3 There...");
-    } else if (!txtProductName.getText().isEmpty()
-            && txtManufacturer.getText().isEmpty()
-            && !chbItemType.getSelectionModel().isEmpty()
-        || !txtManufacturer.getText().isEmpty()
-            && txtProductName.getText().isEmpty()
-            && !chbItemType.getSelectionModel().isEmpty()) {
-      // If one of the fields is empty and the product Type isn't selected, the following occurs
-      productionProgress.setProgress(.66);
-      btnAddProduct.setDisable(true);
-      lblProgress.setText("2/3 There!");
-    } else if (!txtProductName.getText().isEmpty() && txtManufacturer.getText().isEmpty()
-        || !txtManufacturer.getText().isEmpty() && txtProductName.getText().isEmpty()) {
-      // If one of the text fields is empty and the other isn't, the following occurs
-      productionProgress.setProgress(.33);
-      btnAddProduct.setDisable(true);
-      lblProgress.setText("1/3 There...");
-    } else if (!txtManufacturer.getText().isEmpty()
-        && !txtProductName.getText().isEmpty()
+    // These reset the styles of the text fields and progress label
+    lblProgress.setStyle("");
+    txtManufacturer.setStyle("");
+    txtProductName.setStyle("");
+
+    // These variables are declared to make the if-else chains easier to read
+    String productNameField = txtProductName.getText();
+    String productManufactField = txtManufacturer.getText();
+    /*The regular expression checks for any words that do not include non-word characters.
+    This means that it will not accept characters such as ; or * */
+    if (productNameField.matches("\\w+[^\\W]")
+        && productManufactField.matches("\\w+[^\\W]")
         && chbItemType.getSelectionModel().isEmpty()) {
-      // If both text fields are filled but there isn't a product type selected the following occurs
       productionProgress.setProgress(.66);
+      lblProgress.setText("2/3 There...");
       btnAddProduct.setDisable(true);
-      lblProgress.setText("2/3 There!");
-    } else if (!txtManufacturer.getText().isEmpty()
-        && !txtProductName.getText().isEmpty()
+    } else if ((productNameField.matches("\\w+[^\\W]")
+            || productManufactField.matches("\\w+[^\\W]"))
+        && chbItemType.getSelectionModel().isEmpty()) {
+      productionProgress.setProgress(.33);
+      lblProgress.setText("1/3 There...");
+      btnAddProduct.setDisable(true);
+    } else if ((productNameField.matches("\\w+[^\\W]")
+            && productManufactField.matches("\\w+[^\\W]"))
         && !chbItemType.getSelectionModel().isEmpty()) {
-      // If there is a product name, manufacturer and type selected, the following occurs
       productionProgress.setProgress(1);
-      lblProgress.setText("Complete!");
+      lblProgress.setText("Ready!");
       btnAddProduct.setDisable(false);
-    } else {
-      // If NO fields AND the product type has not been selected, the following occurs
+    } else if ((productManufactField.matches("\\w+[^\\W]")
+            || productNameField.matches("\\w+[^\\W]"))
+        && !chbItemType.getSelectionModel().isEmpty()) {
+      productionProgress.setProgress(.66);
+      lblProgress.setText("2/3 There...");
+      btnAddProduct.setDisable(true);
+    }
+    if ((productManufactField.matches("\\w+[\\W]") || productNameField.matches("\\w+[\\W]"))) {
+      lblProgress.setStyle("-fx-text-fill: coral");
+      if (productNameField.matches("\\w+[\\W]")) {
+        txtProductName.setStyle("-fx-background-color: maroon");
+      }
+      if (productManufactField.matches("\\w+[\\W]")) {
+        txtManufacturer.setStyle("-fx-background-color: maroon");
+      }
       productionProgress.setProgress(0);
-      lblProgress.setText("Please Input More text.");
+      lblProgress.setText("Invalid Characters");
+      btnAddProduct.setDisable(true);
     }
   }
 
@@ -268,23 +318,122 @@ public class ProductionTabController implements Initializable {
    */
   @FXML
   void checkProgress(MouseEvent event) {
+    // This resets the style of the text fields and progress label
+    lblProgress.setStyle("");
+    txtManufacturer.setStyle("");
+    txtProductName.setStyle("");
 
-    if (!txtManufacturer.getText().isEmpty() && !txtProductName.getText().isEmpty()) {
-      // If the product type has been selected and both text fields are filled the following occurs
+    // These variables are declared to make things easier to read
+    String productNameField = txtProductName.getText();
+    String productManufactField = txtManufacturer.getText();
+    if (productNameField.matches("\\w+[^\\W]") && productManufactField.matches("\\w+[^\\W]")) {
+      // If the product type has been selected and both text fields are valid the following occurs
       productionProgress.setProgress(1);
-      lblProgress.setText("Complete!");
+      lblProgress.setText("Ready!");
       // Enables the user to add a product
       btnAddProduct.setDisable(false);
-    } else if (!txtProductName.getText().isEmpty() || !txtManufacturer.getText().isEmpty()) {
+    } else if (productNameField.matches("\\w+[^\\W]")
+        || productManufactField.matches("\\w+[^\\W]")) {
       // If the product type has been selected and one of the text fields is filled the following
       // occurs
       productionProgress.setProgress(.66);
       lblProgress.setText("2/3 There!");
+      btnAddProduct.setDisable(true);
+    } else if ((productNameField.matches("\\w+[^\\W]")
+            && productManufactField.matches("\\w+[^\\W]"))
+        && !chbItemType.getSelectionModel().isEmpty()) {
+      lblProgress.setText("Ready!");
+      productionProgress.setProgress(1);
+      btnAddProduct.setDisable(false);
     } else {
       // If the product type has been specified but none of the fields have been filled the
       // following occurs
       productionProgress.setProgress(.33);
       lblProgress.setText("1/3 There...");
+      btnAddProduct.setDisable(true);
+    }
+    if ((productManufactField.matches("\\w+[\\W]") || productNameField.matches("\\w+[\\W]"))) {
+      lblProgress.setStyle("-fx-text-fill: derive(coral, -20%)");
+      if (productNameField.matches("\\w+[\\W]")) {
+        txtProductName.setStyle("-fx-background-color: maroon");
+      }
+      if (productManufactField.matches("\\w+[\\W]")) {
+        txtManufacturer.setStyle("-fx-background-color: maroon");
+      }
+      productionProgress.setProgress(0);
+      lblProgress.setText("Invalid Characters");
+      btnAddProduct.setDisable(true);
+    }
+  }
+
+  /**
+   * This method allows you to change the themes of the program. c:
+   *
+   * @param event this event cares about the checkboxes on the Settings tab.
+   */
+  @FXML
+  void changeTheme(ActionEvent event) {
+    if (starBox.isSelected()) {
+      txtManufacturer.getScene().getStylesheets().add("io/github/anagalacticruby/StarStyle.css");
+      txtManufacturer
+          .getScene()
+          .getStylesheets()
+          .remove("io/github/anagalacticruby/ProductionStyleSheet.css");
+      txtManufacturer
+          .getScene()
+          .getStylesheets()
+          .remove("io/github/anagalacticruby/RetroTheme.css");
+    } else if (retroBox.isSelected()) {
+      txaEmployeeDetails
+          .getScene()
+          .getStylesheets()
+          .remove("io/github/anagalacticruby/StarStyle.css");
+      txaEmployeeDetails
+          .getScene()
+          .getStylesheets()
+          .remove("io/github/anagalacticruby/ProductionStyleSheet.css");
+      txaEmployeeDetails
+          .getScene()
+          .getStylesheets()
+          .add("io/github/anagalacticruby/RetroTheme.css");
+    } else if (noBox.isSelected()) {
+      txaProductLog.getScene().getStylesheets().remove("io/github/anagalacticruby/RetroTheme.css");
+      txaProductLog.getScene().getStylesheets().remove("io/github/anagalacticruby/StarStyle.css");
+      txaProductLog
+          .getScene()
+          .getStylesheets()
+          .add("io/github/anagalacticruby/ProductionStyleSheet.css");
+    } else {
+      txtManufacturer.getScene().getStylesheets().remove("io/github/anagalacticruby/StarStyle.css");
+      txtManufacturer
+          .getScene()
+          .getStylesheets()
+          .remove("io/github/anagalacticruby/RetroTheme.css");
+      txtManufacturer
+          .getScene()
+          .getStylesheets()
+          .add("io/github/anagalacticruby/ProductionStyleSheet.css");
+    }
+  }
+
+  /**
+   * This event generates the employee details for an employee.
+   *
+   * @param event Takes in the password and full name input by the employee in their respective
+   *     fields.
+   */
+  @FXML
+  void generateDetails(MouseEvent event) {
+    if (txtEmployName.getText().matches("\\w+[^\\W]")
+        && passEmployee.getText().matches("\\w+[^\\W]")) {
+      String employeeName = txtEmployName.getText();
+      String employeePass = passEmployee.getText();
+      Employee newEmployee = new Employee(employeeName, employeePass);
+      txaEmployeeDetails.setText(newEmployee.toString());
+    } else {
+      lblEmployError.setText("Invalid Characters!");
+      txtEmployName.setStyle("-fx-base:red");
+      passEmployee.setStyle("-fx-base:red");
     }
   }
 
@@ -300,17 +449,33 @@ public class ProductionTabController implements Initializable {
    */
   @FXML
   void recordProduction(ActionEvent event) {
-    System.out.println("RECORDED");
-    int numProduced = Integer.parseInt(comboChooseQuant.getValue());
-    System.out.println(numProduced); /*
+    if (listChooseProduct.getSelectionModel().isEmpty()) {
+      lblRecording.setText("A product must be selected.");
+      lblRecording.setStyle(
+          "-fx-text-fill: red; -fx-font-weight: bold;"
+              + "-fx-effect: dropshadow(gaussian, ghostwhite, 2, 1, 0, 0);");
+    } else if (comboChooseQuant.getSelectionModel().getSelectedItem().matches("\\d+")) {
+      System.out.println("RECORDED");
+      int numProduced = Integer.parseInt(comboChooseQuant.getValue());
+      System.out.println(numProduced); /*
     ProductionRecord pr = new ProductionRecord(numProduced);
     txaProductLog.insertText(0, pr.toString() + "\n");*/
-    Product selectedProduct = listChooseProduct.getSelectionModel().getSelectedItem();
-    for (int productionRunProduct = 0; productionRunProduct < numProduced; productionRunProduct++) {
-      ProductionRecord productionRecord = new ProductionRecord(selectedProduct, itemCount++);
-      txaProductLog.appendText(productionRecord.toString() + "\n");
+      Product selectedProduct = listChooseProduct.getSelectionModel().getSelectedItem();
+      for (int productionRunProduct = 0;
+          productionRunProduct < numProduced;
+          productionRunProduct++) {
+        ProductionRecord productionRecord = new ProductionRecord(selectedProduct, itemCount++);
+        txaProductLog.appendText(productionRecord.toString() + "\n");
+        ArrayList<ProductionRecord> productionRun = new ArrayList<>();
+      }
+      lblRecording.setStyle("-fx-text-fill: white; -fx-font-weight: normal");
+      lblRecording.setText("Check the Production Log tab!");
+    } else {
+      lblRecording.setText("Invalid Characters! >:(");
+      lblRecording.setStyle(
+          "-fx-text-fill: red; -fx-font-weight: bold;"
+              + "-fx-effect: dropshadow(gaussian, azure, 2,1,0,0);");
     }
-    lblRecording.setText("Check the Production Log tab!");
   }
 
   /**
@@ -329,16 +494,24 @@ public class ProductionTabController implements Initializable {
     comboChooseQuant.setEditable(true);
     comboChooseQuant.getSelectionModel().selectFirst();
     chbItemType.getItems().addAll(ItemType.values());
+    chbItemType.getSelectionModel().selectFirst();
     TestDriver.testMultimedia();
     // The following line of code adds a "Sample" row to the table to verify it is functional.
     Product sample = new Widget("Sample", "Oracle", ItemType.VISUAL);
     productLine.add(sample);
-    listChooseProduct.getItems().addAll(productLine);
+
     setupProductLineTable();
     try {
       loadProductList();
-    } catch (SQLException e) {
+
+    } catch (SQLException | NullPointerException e) {
       e.printStackTrace();
+    }
+    listChooseProduct.getItems().addAll(productLine);
+
+    if (!listChooseProduct.getItems().isEmpty()) {
+      btnRecordProduction.setDisable(false);
+      lblRecording.setText("Select a product to record.");
     }
   }
 
@@ -360,34 +533,37 @@ public class ProductionTabController implements Initializable {
 
   private void loadProductList() throws SQLException {
     initializeDB();
-    String sql = "SELECT * FROM Product";
+    String sql = "Select * FROM Product";
 
     ResultSet rs = stmt.executeQuery(sql);
     while (rs.next()) {
-      Integer id = rs.getInt(1);
-      String name = rs.getString(2);
-      String type = rs.getString(3);
-      String manufacturer = rs.getString(4);
+      int id = rs.getInt(1);
+      String name = rs.getString("name");
+      String type = rs.getString("type");
+      String manufacturer = rs.getString("manufacturer");
       //
 
-      ItemType DBType = null;
-      if (type.equals("AU")) {
-        DBType = ItemType.AUDIO;
-      }else if(type.equals("VI")){
-        DBType = ItemType.VISUAL;
-      }else if(type.equals("AM")){
-        DBType = ItemType.AUDIO_MOBILE;
-      }else if(type.equals("VM")){
-        DBType = ItemType.VISUAL_MOBILE;
+      ItemType dbType;
+      switch (type) {
+        case "VI":
+          dbType = ItemType.VISUAL;
+          break;
+        case "AM":
+          dbType = ItemType.AUDIO_MOBILE;
+          break;
+        case "VM":
+          dbType = ItemType.VISUAL_MOBILE;
+          break;
+        default:
+          dbType = ItemType.AUDIO;
       }
 
-
-      Product productFromDB = new Widget(id, name, manufacturer, DBType);
+      Product productFromDB = new Widget(id, name, manufacturer, dbType);
 
       productLine.add(productFromDB);
-      rs.close();
-      stmt.close();
+      // listChooseProduct.getItems().add(productFromDB);
     }
-
+    conn.close();
+    stmt.close();
   }
 }

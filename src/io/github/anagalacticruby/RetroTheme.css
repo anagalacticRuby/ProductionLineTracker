@@ -1,0 +1,174 @@
+/**
+*
+* This is the old Production Style Sheet theme
+* Last Edited Date: 11/23/2019
+* Author: Nicholas Hansen
+ */
+.root {
+    /*
+        -fx-base: #005e5e;*/
+    -fx-base: derive(royalblue, -40%);
+    -fx-font-family: Verdana;
+}
+
+#btnAddProduct, #btnRecordProduction {
+    -fx-base: darkorchid;
+    -fx-effect: dropshadow(one-pass-box, lightslategray, 2, 2, 1, 1);
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+
+}
+
+#btnAddProduct:pressed, #btnRecordProduction:pressed {
+    -fx-background-color: linear-gradient(mediumpurple, mediumvioletred);
+}
+
+#chbItemType {
+    /*
+        -fx-base: navy;*/
+    -fx-text-alignment: center;
+    -fx-background-color: radial-gradient(center 50% 50%, radius 50%, darkslateblue, slateblue);
+    -fx-effect: innershadow(one-pass-box, powderblue, 2, 4, 1, 1);
+}
+
+.choice-box .context-menu {
+    -fx-background-color: derive(slateblue, -20%);
+    -fx-background-radius: 6 5 2;
+}
+
+#chbItemType .context-menu .label {
+    -fx-text-fill: ghostwhite;
+}
+
+
+.choice-box .open-button .arrow {
+    -fx-background-color: royalblue, green, ghostwhite;
+}
+
+#chbItemType .label, .choice-box .label {
+    -fx-text-fill: inherit;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+
+#comboChooseQuant {
+    -fx-base: slateblue;
+    -fx-background-radius: 2 10 2 10;
+}
+
+#comboChooseQuant:selected, #comboChooseQuant .arrow-button {
+    -fx-background-radius: 2 10 2 10;
+}
+
+#comboChooseQuant .arrow-button .arrow {
+    -fx-background-color: green, ghostwhite;
+}
+
+
+.grid-pane {
+    -fx-base: darkslateblue;
+    /*    -fx-background-color: slategray;*/
+    -fx-background-radius: 5 5 5 5;
+    -fx-text-fill: ghostwhite;
+}
+
+#lblManufacturer, #lblProductName, #lblItemType,
+#lblChooseProduct, #lblChooseQuant, #lblExistingProducts,
+#lblProgress, #lblRecording {
+    -fx-text-fill: ghostwhite;
+    -fx-effect: dropshadow(one-pass-box, black, 2, 2, 1, 1);
+}
+
+#lblRecording, #lblChooseProduct, #lblChooseQuant, #lblProgress, #lblExistingProducts {
+    -fx-font-size: 13pt;
+}
+
+
+.list-cell:odd {
+    -fx-base: derive(slateblue, 20%);
+}
+
+.list-cell {
+    -fx-base: derive(mediumvioletred, 10%);
+}
+
+.list-view:focused > .virtual-flow > .clipped-container .sheet > .list-cell:filled:selected, .list-view:selected {
+    -fx-background-color: darkblue;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: darkblue;
+    -fx-text-fill: ghostwhite;
+}
+
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to left, darkgreen 20%, green 20%, yellowgreen 40%,
+    greenyellow 40%, yellow 60%, sandybrown 60%, firebrick 80%, #841b2d 80%);
+    -fx-background-radius: 4 4 4 4;
+    -fx-background-insets: 5 5 5 5;
+}
+
+.progress-bar .track {
+    -fx-background-color: linear-gradient(to top, slateblue, lightslategray);
+    -fx-effect: innershadow(one-pass-box, black, 2, 1, 1, 1);
+    -fx-background-radius: 3 3 3 3;
+}
+
+.rectangle {
+    -fx-background-color: azure;
+    -fx-fill: linear-gradient(to bottom, slateblue, navy 90%);
+    -fx-effect: innershadow(one-pass-box, ghostwhite, 2, 4, 1, 1)
+}
+
+
+.tab-header-background {
+    -fx-background-color: linear-gradient(to bottom, slateblue, darkslateblue, darkmagenta);
+    -fx-background-insets: 0 0 1 0;
+}
+
+.tab:selected {
+    -fx-base: derive(purple, -20%);
+}
+
+.table-row-cell:odd {
+    -fx-background-color: linear-gradient(to bottom, lightsteelblue, slateblue);
+    -fx-border-color: linear-gradient(to bottom, ghostwhite, transparent);
+}
+
+.table-row-cell:even {
+    -fx-background-color: linear-gradient(to bottom, violet, palevioletred);
+    -fx-border-color: black;
+}
+
+.table-row-cell:focused, .table-row-cell:selected {
+    -fx-background-color: derive(lightskyblue, 50%);
+    -fx-text-fill: black;
+    -fx-fill: red;
+}
+
+.table-view:row-selection {
+    -fx-light-text-color: black;
+}
+
+.table-column .label {
+    -fx-text-fill: ghostwhite;
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to top, darkorchid, darkslateblue 90%);
+    -fx-background-insets: 0 1 0 0;
+    -fx-effect: innershadow(one-pass-box, slategray, 4, 2, 1, 1);
+
+}
+
+.thumb {
+    -fx-base: linen;
+    -fx-background-color: linear-gradient(to left, azure, powderblue);
+}
+
+#txtManufacturer, #txtProductName {
+    -fx-text-fill: black;
+    -fx-effect: innershadow(one-pass-box, ghostwhite, 2, 4, 1, 1);
+    -fx-base: slateblue;
+}

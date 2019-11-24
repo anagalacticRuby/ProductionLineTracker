@@ -123,31 +123,11 @@ class ProductionRecord {
       product.setManufacturer(product.getManufacturer() + '-');
     }
 
-    if (itemCount < 10) {
-      this.serialNumber =
-          product.getManufacturer().substring(0, 3)
-              + product.getType().getCode()
-              + "0000"
-              + itemCount;
-    } else if (itemCount < 100) {
-      this.serialNumber =
-          product.getManufacturer().substring(0, 3)
-              + product.getType().getCode()
-              + "000"
-              + itemCount;
-    } else if (itemCount < 1000) {
-      this.serialNumber =
-          product.getManufacturer().substring(0, 3)
-              + product.getType().getCode()
-              + "00"
-              + itemCount;
-    } else if (itemCount < 10000) {
-      this.serialNumber =
-          product.getManufacturer().substring(0, 3) + product.getType().getCode() + "0" + itemCount;
-    } else {
-      this.serialNumber =
-          product.getManufacturer().substring(0, 3) + product.getType().getCode() + itemCount;
-    }
+    this.serialNumber =
+        product.getManufacturer().substring(0, 3)
+            + product.getType().getCode()
+            + String.format("%05d", itemCount);
+
     dateProduced = new Date();
     this.dateProduced = new Date(dateProduced.getTime());
   }
