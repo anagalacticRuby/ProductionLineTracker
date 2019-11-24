@@ -424,16 +424,22 @@ public class ProductionTabController implements Initializable {
    */
   @FXML
   void generateDetails(MouseEvent event) {
-    if (txtEmployName.getText().matches("\\w+[^\\W]")
-        && passEmployee.getText().matches("\\w+[^\\W]")) {
+    if (txtEmployName.getText().matches("\\w+\\s\\w+[^;^:*'/\"=\\s{2,}]")
+        && passEmployee.getText().matches("\\w+[^;^:*'/\"`=\\s+]")) {
       String employeeName = txtEmployName.getText();
       String employeePass = passEmployee.getText();
       Employee newEmployee = new Employee(employeeName, employeePass);
       txaEmployeeDetails.setText(newEmployee.toString());
+      lblEmployError.setText("V Your Details V");
+      txtEmployName.setStyle("");
+      passEmployee.setStyle("");
     } else {
       lblEmployError.setText("Invalid Characters!");
-      txtEmployName.setStyle("-fx-base:red");
-      passEmployee.setStyle("-fx-base:red");
+      if (!txtEmployName.getText().matches("\\w+\\s\\w+[^;^:*'/\"=\\s{2,}\\[\\](){}|&]")) {
+        txtEmployName.setStyle("-fx-base:red");
+      } else if (!passEmployee.getText().matches("\\w+[^;^:*'/\"`\\s{2,}\\[\\](){}|&]")) {
+        passEmployee.setStyle("-fx-base:red");
+      }
     }
   }
 
