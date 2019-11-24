@@ -19,8 +19,8 @@ Java Documentation can be found at:
 [This GitHub Pages Link](https://anagalacticruby.github.io/ProductionLineTracker/)
 
 ## Diagrams
-(dbDiagrams.png)
-(FinalClassDiagrams.png)
+![(dbDiagrams.png)](dbDiagrams.png)
+![(FinalClassDiagrams.png)](FinalClassDiagrams.png)
 ## Getting Started
 
 If you want to run this program, make sure that you have the most recent version of java installed on your device. (In the near future a runnable jar file will be available for those who do not wish to download a full IDE to run this program)
