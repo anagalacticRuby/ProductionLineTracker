@@ -435,9 +435,9 @@ public class ProductionTabController implements Initializable {
       passEmployee.setStyle("");
     } else {
       lblEmployError.setText("Invalid Characters!");
-      if (!txtEmployName.getText().matches("\\w+\\s\\w+[^;^:*'/\"=\\s{2,}\\[\\](){}|&]")) {
+      if (!txtEmployName.getText().matches("\\w+\\s\\w+[^;^:*'/\"=\\s{2,}\\[\\]()|&]")) {
         txtEmployName.setStyle("-fx-base:red");
-      } else if (!passEmployee.getText().matches("\\w+[^;^:*'/\"`\\s{2,}\\[\\](){}|&]")) {
+      } else if (!passEmployee.getText().matches("\\w+[^;^:*'/\"`\\s{2,}\\[\\]()|&]")) {
         passEmployee.setStyle("-fx-base:red");
       }
     }
