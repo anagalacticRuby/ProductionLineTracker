@@ -38,9 +38,13 @@ Upon booting up, the program will greet you(the user) with a tab pane featuring 
 ## Built With
 IntelliJ IDEA 2019.2.1 Ultimate Edition
 Resources used: 
+
 [Java Css Reference Guide](https://docs.oracle.com/javase/9/docs/api/javafx/scene/doc-files/cssref.html)
+
 [Java Regular Expression Article](https://www.vogella.com/tutorials/JavaRegularExpressions/article.html)
+
 [How to enable multiple themes in a javafx program](https://stackoverflow.com/questions/49159286/make-a-dark-mode-with-javafx)
+
 [The Modena Source Code](https://gist.github.com/maxd/63691840fc372f22f470)
 ## Contributing
 Got a neat style sheet you would like to see in a future build? Make a separate branch and upload some that you would think are neat. Be sure to specify where they are located and what changes have been made somewhere in the commit messages.
